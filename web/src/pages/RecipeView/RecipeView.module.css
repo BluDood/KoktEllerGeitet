@@ -1,0 +1,98 @@
+.recipe {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: appear 500ms ease;
+  position: relative;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  padding: 10px 20px;
+}
+
+.header .cover {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #222;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 200px;
+  height: 200px;
+}
+
+.header .cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.header .cover span {
+  font-size: 72px;
+}
+
+.header .info {
+  display: flex;
+  flex-direction: column;
+}
+
+.header .details {
+  margin-top: 10px;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  animation: appear 500ms ease;
+}
+
+.actions {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.actions button {
+  all: unset;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.actions button[data-type='delete'] {
+  color: red;
+}
+
+.actions button[data-type='save'] {
+  color: #0064ff;
+}
+
+.ingredients {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.ingredients ul {
+  margin-left: 20px;
+}
+
+.instructions {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

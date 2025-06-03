@@ -1,0 +1,122 @@
+.update {
+  display: flex;
+  flex-direction: column;
+  animation: appear 500ms ease;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.toolbar button {
+  all: unset;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.toolbar button.save {
+  color: #0064ff;
+}
+
+input.title {
+  flex: 1;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.info {
+  display: flex;
+  gap: 30px;
+  margin-top: 5px;
+}
+
+.field {
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+}
+
+.field h3 {
+  font-size: 18px;
+}
+
+.recipes {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.recipes .list {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  gap: 10px;
+  max-width: 500px;
+}
+
+.recipes .list .recipe {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 10px;
+  border-radius: 8px;
+  background: #111;
+}
+
+.recipes .list .recipe .text {
+  display: flex;
+  align-items: flex-end;
+  white-space: nowrap;
+  gap: 10px;
+}
+
+.recipes .list .recipe .text h2 {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.recipes .list .recipe .text p {
+  color: #aaa;
+}
+
+.recipes .list .recipe button {
+  all: unset;
+  display: flex;
+  cursor: pointer;
+}
+
+.recipes .list .recipe select {
+  padding: 5px;
+  font-size: 16px;
+  border-radius: 5px;
+  background: #222;
+  color: #fff;
+  border: 1px solid #333;
+  transition: 200ms ease;
+  flex: 1;
+}
+
+.recipes .list .recipe button {
+  color: #0064ff;
+}
+
+.recipes .list .recipe button[data-type='delete'] {
+  color: red;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

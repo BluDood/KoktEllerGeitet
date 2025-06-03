@@ -1,0 +1,103 @@
+.meal {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: appear 500ms ease;
+  position: relative;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  padding: 10px 20px;
+}
+
+.header .cover {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 32px;
+  background: #222;
+  border-radius: 10px;
+}
+
+.header .cover span {
+  font-size: 72px;
+}
+
+.header .info {
+  display: flex;
+  flex-direction: column;
+}
+
+.header .details {
+  margin-top: 10px;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  animation: appear 500ms ease;
+}
+
+.actions {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.actions button {
+  all: unset;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.actions button[data-type='delete'] {
+  color: red;
+}
+
+.actions button[data-type='save'] {
+  color: #0064ff;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  animation: appear 500ms ease;
+}
+
+.table th,
+.table td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #444;
+}
+
+.table th span {
+  vertical-align: middle;
+  padding-right: 5px;
+  font-size: 20px;
+  padding-bottom: 3px;
+}
+
+.table tr:not(:has(th)) {
+  cursor: pointer;
+  transition: 200ms ease;
+}
+
+.table tr:not(:has(th)):hover {
+  background-color: #111;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

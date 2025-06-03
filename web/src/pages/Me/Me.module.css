@@ -1,0 +1,69 @@
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px;
+}
+
+.me {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  position: relative;
+  animation: appear 500ms ease;
+}
+
+.profile {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.cover {
+  color: #fff;
+  background: #111;
+  padding: 20px;
+  border-radius: 50%;
+}
+
+.cover span {
+  font-size: 80px;
+}
+
+.actions {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.actions button {
+  all: unset;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.actions button[data-type='delete'] {
+  color: red;
+}
+
+.actions button[data-type='save'] {
+  color: #0064ff;
+}
+
+input.name {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

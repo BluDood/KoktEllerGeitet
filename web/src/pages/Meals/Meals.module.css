@@ -1,0 +1,69 @@
+.meals {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: appear 500ms ease;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.actions {
+  display: flex;
+  gap: 20px;
+}
+
+.actions select {
+  padding: 8px;
+  border-radius: 5px;
+  background: #111;
+  color: #fff;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.add {
+  display: flex;
+  cursor: pointer;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.meal {
+  all: unset;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 200px;
+  padding: 16px;
+  border-radius: 10px;
+  background: #111;
+  cursor: pointer;
+  animation: appear 500ms ease;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  animation: appear 500ms ease;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

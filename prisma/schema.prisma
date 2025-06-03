@@ -1,0 +1,62 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @unique @default(cuid())
+  username  String   @unique
+  createdAt DateTime @default(now())
+  salt      String
+  hash      String
+  type      UserType @default(user)
+
+  tokens Token[]
+  meals  Meal[]
+}
+
+enum UserType {
+  user
+  admin
+}
+
+model Token {
+  id        String   @id @unique @default(cuid())
+  hash      String   @unique
+  createdAt DateTime @default(now())
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+}
+
+model Recipe {
+  id           String   @id @unique @default(cuid())
+  name         String
+  image        String   @default("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiyDRuMxLUUyNkbDfMOxqFjQzwOLI8hUsC5E5a5NVIqSPeDWONt6UouQyBuZuWbMqlfUy3sMJsrMMcQ8DEeNVbJYDhiew-JoN3_LbCa27ahv0W9v9LLb8kHFyoX7PvaRRsSTBRyR9dCUbs/s400/the_cake_is_a_lie_portal.jpg")
+  description  String
+  ingredients  String[]
+  instructions String
+
+  createdAt DateTime @default(now())
+  category  String
+  tastes    String[]
+  meals     Meal[]
+}
+
+model Meal {
+  id        String   @id @unique @default(cuid())
+  name      String
+  createdAt DateTime @default(now())
+  occasions String[]
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  recipes   Recipe[]
+}

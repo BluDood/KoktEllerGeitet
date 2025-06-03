@@ -1,0 +1,57 @@
+.new {
+  display: flex;
+  flex-direction: column;
+  animation: appear 500ms ease;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.toolbar button {
+  all: unset;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.toolbar button.save {
+  color: #0064ff;
+}
+
+input.title {
+  flex: 1;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.info {
+  display: flex;
+  gap: 30px;
+  margin-top: 5px;
+}
+
+.field {
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+}
+
+.field h3 {
+  font-size: 18px;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
