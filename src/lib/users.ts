@@ -18,13 +18,15 @@ export async function createUser({
   password: string
 }) {
   const { salt, hash } = hashPassword(password)
+  const userCount = await prisma.user.count()
 
   const user = await prisma.user.create({
     data: {
       id: random(16),
       username,
       salt,
-      hash
+      hash,
+      type: userCount === 0 ? 'admin' : 'user'
     }
   })
 
