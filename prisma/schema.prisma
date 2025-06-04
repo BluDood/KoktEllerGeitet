@@ -40,7 +40,7 @@ model Token {
 model Recipe {
   id           String   @id @unique @default(cuid())
   name         String
-  image        String   @default("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiyDRuMxLUUyNkbDfMOxqFjQzwOLI8hUsC5E5a5NVIqSPeDWONt6UouQyBuZuWbMqlfUy3sMJsrMMcQ8DEeNVbJYDhiew-JoN3_LbCa27ahv0W9v9LLb8kHFyoX7PvaRRsSTBRyR9dCUbs/s400/the_cake_is_a_lie_portal.jpg")
+  image        String
   description  String
   ingredients  String[]
   instructions String
