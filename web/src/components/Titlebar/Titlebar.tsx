@@ -8,8 +8,8 @@ const Titlebar: React.FC = () => {
   const { user } = useContext(UserContext)
 
   const actions = [
-    { icon: 'recipe_book', action: () => navigate('/recipes') },
     { icon: 'add', action: () => navigate('/recipes/new'), admin: true },
+    { icon: 'recipe_book', action: () => navigate('/recipes') },
     {
       icon: 'restaurant_menu',
       action: () => navigate('/menus')
