@@ -1,7 +1,7 @@
 import { Recipe } from '../../generated/prisma/index.js'
 import prisma from './prisma.js'
 
-// filtrer sang for sending tilbake til bruker
+// filtrer oppskrift for sending tilbake til bruker
 export function filterRecipe(recipe: Recipe) {
   return {
     id: recipe.id,
@@ -15,14 +15,14 @@ export function filterRecipe(recipe: Recipe) {
   }
 }
 
-// hent alle sanger
+// hent alle oppskrifter
 export async function getRecipes() {
   const recipe = await prisma.recipe.findMany()
 
   return recipe
 }
 
-// hent en sang
+// hent en oppskrift
 export async function getRecipe(id: string) {
   const recipe = await prisma.recipe.findUnique({
     where: {
@@ -33,7 +33,7 @@ export async function getRecipe(id: string) {
   return recipe
 }
 
-// lag sang
+// lag oppskrift
 export async function createRecipe({
   name,
   image,
@@ -66,7 +66,7 @@ export async function createRecipe({
   return recipe
 }
 
-// oppdater sang, dataen som skal oppdateres kan være valgfritt for å beholde den forrige verdien
+// oppdater oppskrift, dataen som skal oppdateres kan være valgfritt for å beholde den forrige verdien
 export async function updateRecipe(
   id: string,
   {
@@ -105,7 +105,7 @@ export async function updateRecipe(
   return recipe
 }
 
-// slett sang
+// slett oppskrift
 export async function deleteRecipe(id: string) {
   const recipe = await prisma.recipe.delete({
     where: {
@@ -116,7 +116,7 @@ export async function deleteRecipe(id: string) {
   return recipe
 }
 
-// søk etter sanger, som sjekker om søket finnes i en tittel, artist, sjanger eller vibe
+// søk etter oppskrifter, som sjekker om søket finnes i navn, beskrivelse, kategori eller smaksprofiler
 export async function searchRecipes(query: string) {
   const recipes = await prisma.recipe.findMany({
     where: {

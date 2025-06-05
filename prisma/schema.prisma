@@ -20,7 +20,7 @@ model User {
   type      UserType @default(user)
 
   tokens Token[]
-  meals  Meal[]
+  menus  Menu[]
 }
 
 enum UserType {
@@ -48,10 +48,10 @@ model Recipe {
   createdAt DateTime @default(now())
   category  String
   tastes    String[]
-  meals     Meal[]
+  menus     Menu[]
 }
 
-model Meal {
+model Menu {
   id        String   @id @unique @default(cuid())
   name      String
   createdAt DateTime @default(now())

@@ -36,7 +36,7 @@ const NewRecipe: React.FC = () => {
       return
     }
 
-    // opprett sangen
+    // opprett oppskriften
     const res = await instance.post('/recipes', {
       name,
       description,
@@ -54,7 +54,7 @@ const NewRecipe: React.FC = () => {
     })
 
     if (res.status === 200) {
-      // naviger til sangen
+      // naviger til oppskriften
       navigate(`/recipes/${res.data.id}`)
     } else {
       alert('Error creating recipe')

@@ -1,55 +1,55 @@
 import React, { useEffect, useState } from 'react'
-import styles from './Meals.module.css'
+import styles from './Menus.module.css'
 import { instance } from '../../lib/api.ts'
 import { Link, useNavigate } from 'react-router'
 import Loader from '../../components/Loader/Loader.tsx'
 
-const Meals: React.FC = () => {
+const Menus: React.FC = () => {
   const navigate = useNavigate()
-  const [meals, setMeals] = useState<MealWithCount[] | null>(null)
-  const [shownMeals, setShownMeals] = useState<MealWithCount[] | null>(
+  const [menus, setMenus] = useState<MenuWithCount[] | null>(null)
+  const [shownMenus, setShownMenus] = useState<MenuWithCount[] | null>(
     null
   )
   const [occasion, setOccasion] = useState<string>('')
 
   useEffect(() => {
-    // hent alle spillelister for brukeren, som inkluderer antall sanger
-    async function fetchMeals() {
-      setMeals(null)
-      const meals = await instance.get<MealWithCount[]>('/meals')
+    // hent alle menyer for brukeren, som inkluderer antall oppskrifter
+    async function fetchMenus() {
+      setMenus(null)
+      const menus = await instance.get<MenuWithCount[]>('/menus')
 
-      if (meals.status === 200) {
-        setMeals(meals.data)
+      if (menus.status === 200) {
+        setMenus(menus.data)
       } else {
-        console.error('Failed to fetch meals')
+        console.error('Failed to fetch menus')
       }
     }
 
-    fetchMeals()
+    fetchMenus()
   }, [])
 
   useEffect(() => {
-    if (!meals) return
-    // filtrer spillelistene hvis bruker har valgt en anledning, ellers vis alle
-    setShownMeals(null)
+    if (!menus) return
+    // filtrer menyene hvis bruker har valgt en anledning, ellers vis alle
+    setShownMenus(null)
     // timeout brukes for at elementene skal fjernes og rendres på nytt for å vise animasjon
     setTimeout(() => {
-      setShownMeals(
-        meals.filter(meal =>
+      setShownMenus(
+        menus.filter(menu =>
           ['all', ''].includes(occasion)
             ? true
-            : meal.occasions.includes(occasion)
+            : menu.occasions.includes(occasion)
         )
       )
     }, 0)
-  }, [meals, occasion])
+  }, [menus, occasion])
 
   return (
-    <div className={styles.meals}>
+    <div className={styles.menus}>
       <div className={styles.header}>
-        <h2>Your Meals</h2>
+        <h2>Your Menus</h2>
         <div className={styles.actions}>
-          {meals ? (
+          {menus ? (
             <select
               value={occasion}
               onChange={e => setOccasion(e.target.value)}
@@ -59,7 +59,7 @@ const Meals: React.FC = () => {
               </option>
               <option value="all">All</option>
               {Array.from(
-                new Set(meals.map(meal => meal.occasions).flat())
+                new Set(menus.map(menu => menu.occasions).flat())
               ).map(occasion => (
                 <option key={occasion} value={occasion}>
                   {occasion}
@@ -69,25 +69,25 @@ const Meals: React.FC = () => {
           ) : null}
           <button
             className={styles.add}
-            onClick={() => navigate('/meals/new')}
+            onClick={() => navigate('/menus/new')}
           >
             <span className="material-icons">add</span>
           </button>
         </div>
       </div>
-      {shownMeals ? (
+      {shownMenus ? (
         <div className={styles.grid}>
-          {shownMeals.map(meal => (
+          {shownMenus.map(menu => (
             <Link
-              key={meal.id}
-              className={styles.meal}
-              to={`/meals/${meal.id}`}
+              key={menu.id}
+              className={styles.menu}
+              to={`/menus/${menu.id}`}
             >
-              <h2>{meal.name}</h2>
-              <p>{meal.occasions.join(', ')}</p>
+              <h2>{menu.name}</h2>
+              <p>{menu.occasions.join(', ')}</p>
               <p>
-                {meal.recipes} recipe
-                {meal.recipes === 1 ? '' : 's'}
+                {menu.recipes} recipe
+                {menu.recipes === 1 ? '' : 's'}
               </p>
             </Link>
           ))}
@@ -101,4 +101,4 @@ const Meals: React.FC = () => {
   )
 }
 
-export default Meals
+export default Menus

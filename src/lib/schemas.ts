@@ -50,12 +50,12 @@ export const searchRecipeSchema = z.object({
   query: z.string().min(1).max(64)
 })
 
-export const createMealSchema = z.object({
+export const createMenuSchema = z.object({
   name: z.string().min(1),
   occasions: z.array(z.string()).min(1).max(16)
 })
 
-export const updateMealSchema = z.object({
+export const updateMenuSchema = z.object({
   name: z.string().min(1).optional(),
   occasions: z.array(z.string()).min(1).max(16).optional(),
   recipes: z.array(id).optional()

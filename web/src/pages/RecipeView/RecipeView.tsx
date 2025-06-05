@@ -20,7 +20,7 @@ const RecipeView: React.FC = () => {
     const res = await instance.delete(`/recipes/${params.id}`)
 
     if (res.status === 200) {
-      // naviger tilbake til sanglisten
+      // naviger tilbake til listen over oppskrifter
       navigate('/recipes')
     } else {
       console.error('Failed to delete recipe')
@@ -28,7 +28,7 @@ const RecipeView: React.FC = () => {
   }
 
   useEffect(() => {
-    // hent sang
+    // hent oppskrift
     async function fetchRecipe() {
       const recipe = await instance.get(`/recipes/${params.id}`)
 

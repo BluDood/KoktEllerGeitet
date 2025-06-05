@@ -1,9 +1,9 @@
 import React from 'react'
-import styles from './NewMeal.module.css'
+import styles from './NewMenu.module.css'
 import { instance } from '../../lib/api.ts'
 import { useNavigate } from 'react-router'
 
-const NewMeal: React.FC = () => {
+const NewMenu: React.FC = () => {
   const navigate = useNavigate()
   const nameRef = React.useRef<HTMLInputElement>(null)
   const occasionsRef = React.useRef<HTMLInputElement>(null)
@@ -18,10 +18,10 @@ const NewMeal: React.FC = () => {
       return
     }
 
-    // opprett spillelisten
-    const res = await instance.post('/meals', {
+    // opprett menyen
+    const res = await instance.post('/menus', {
       name,
-      // splitt occasions siden det lagret som liste i databasen
+      // splitt anledninger siden det lagres som liste i databasen
       occasions: occasions
         .split(' ')
         .map(vibe => vibe.trim())
@@ -29,16 +29,16 @@ const NewMeal: React.FC = () => {
     })
 
     if (res.status === 200) {
-      // naviger til spillelisten
-      navigate(`/meals/${res.data.id}`)
+      // naviger til menyen
+      navigate(`/menus/${res.data.id}`)
     } else {
-      alert('Error creating meal')
+      alert('Error creating menu')
     }
   }
 
   return (
     <div className={styles.new}>
-      <h2>Create new meal</h2>
+      <h2>Create new menu</h2>
       <div className={styles.toolbar}>
         <input
           type="text"
@@ -64,4 +64,4 @@ const NewMeal: React.FC = () => {
   )
 }
 
-export default NewMeal
+export default NewMenu

@@ -15,16 +15,16 @@ interface User {
   type: 'user' | 'admin'
 }
 
-interface Meal {
+interface Menu {
   id: string
   name: string
   occasions: string[]
 }
 
-type MealWithCount = Meal & {
+type MenuWithCount = Menu & {
   recipes: number
 }
 
-type MealWithRecipes = Meal & {
+type MenuWithRecipes = Menu & {
   recipes: Recipe[]
 }

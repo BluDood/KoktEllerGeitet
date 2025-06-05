@@ -8,10 +8,10 @@ import NewRecipe from './pages/NewRecipe/NewRecipe.tsx'
 import Me from './pages/Me/Me.tsx'
 import RecipeView from './pages/RecipeView/RecipeView.tsx'
 import EditRecipe from './pages/EditRecipe/EditRecipe.tsx'
-import Meals from './pages/Meals/Meals.tsx'
-import MealView from './pages/MealView/MealView.tsx'
-import EditMeal from './pages/EditMeal/EditMeal.tsx'
-import NewMeal from './pages/NewMeal/NewMeal.tsx'
+import Menus from './pages/Menus/Menus.tsx'
+import MenuView from './pages/MenuView/MenuView.tsx'
+import EditMenu from './pages/EditMenu/EditMenu.tsx'
+import NewMenu from './pages/NewMenu/NewMenu.tsx'
 
 const App: React.FC = () => {
   return (
@@ -23,10 +23,10 @@ const App: React.FC = () => {
         <Route path="recipes/:id/edit" element={<EditRecipe />} />
         <Route path="recipes/new" element={<NewRecipe />} />
         <Route path="me" element={<Me />} />
-        <Route path="meals" element={<Meals />} />
-        <Route path="meals/:id" element={<MealView />} />
-        <Route path="meals/:id/edit" element={<EditMeal />} />
-        <Route path="meals/new" element={<NewMeal />} />
+        <Route path="menus" element={<Menus />} />
+        <Route path="menus/:id" element={<MenuView />} />
+        <Route path="menus/:id/edit" element={<EditMenu />} />
+        <Route path="menus/new" element={<NewMenu />} />
       </Route>
       <Route path="/auth">
         <Route index element={<Navigate to={'/auth/login'} />} />

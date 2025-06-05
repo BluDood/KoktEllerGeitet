@@ -41,7 +41,7 @@ const Register: React.FC = () => {
         return alert('Invalid username or password')
       }
     } else {
-      // oppdater bruker i context, lagre token, naviger til forsiden som vil navigere til sangoversikt
+      // oppdater bruker i context, lagre token, naviger til forsiden som vil navigere til listen over oppskrifter
       setUser(res.data.user)
       localStorage.setItem('token', res.data.token)
       navigate('/')

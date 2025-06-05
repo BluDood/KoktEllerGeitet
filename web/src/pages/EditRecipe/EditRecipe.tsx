@@ -39,7 +39,7 @@ const EditRecipe: React.FC = () => {
       return
     }
 
-    // oppdater sangen
+    // oppdater oppskriften
     const res = await instance.patch(`/recipes/${params.id}`, {
       name,
       description,
@@ -50,7 +50,7 @@ const EditRecipe: React.FC = () => {
         .filter(ingredient => ingredient.length > 0),
       instructions,
       category,
-      // splitt tastes siden det lagret som liste i databasen
+      // splitt smaksprofiler siden det lagres som liste i databasen
       tastes: tastes
         .split(' ')
         .map(vibe => vibe.trim())
@@ -58,7 +58,7 @@ const EditRecipe: React.FC = () => {
     })
 
     if (res.status === 200) {
-      // naviger tilbake til sangen
+      // naviger tilbake til oppskriften
       navigate(`/recipes/${res.data.id}`)
     } else {
       alert('Error updating recipe')
@@ -66,7 +66,7 @@ const EditRecipe: React.FC = () => {
   }
 
   useEffect(() => {
-    // hent sang
+    // hent oppskrift
     async function fetchRecipe() {
       const res = await instance.get(`/recipes/${params.id}`)
 

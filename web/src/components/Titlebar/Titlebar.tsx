@@ -12,7 +12,7 @@ const Titlebar: React.FC = () => {
     { icon: 'add', action: () => navigate('/recipes/new'), admin: true },
     {
       icon: 'restaurant_menu',
-      action: () => navigate('/meals')
+      action: () => navigate('/menus')
     },
     { icon: 'person', action: () => navigate('/me') },
     {

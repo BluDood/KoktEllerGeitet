@@ -13,7 +13,7 @@ const Recipes: React.FC = () => {
     setRecipes(null)
     const query = queryRef.current?.value
     if (query) {
-      // søk etter sanger om bruker har skrevet noe i søkefeltet
+      // søk etter oppskrifter om bruker har skrevet noe i søkefeltet
       const recipes = await instance.post('/recipes/search', {
         query
       })
@@ -24,7 +24,7 @@ const Recipes: React.FC = () => {
         console.error('Failed to fetch recipes')
       }
     } else {
-      // hvis ikke, hent alle sanger
+      // hvis ikke, hent alle oppskrifter
       const recipes = await instance.get('/recipes')
 
       if (recipes.status === 200) {

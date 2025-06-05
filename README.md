@@ -1,6 +1,6 @@
 # KoktEllerGeitet (Eksamen Juni 2025)
 
-En full-stack webapplikasjon for å ha oversikt over oppskrifter. Inkluderer hjemmelaget autentisering med sikker lagring av passord ved bruk av hashing og salting, og autorisering for å skille mellom admin-brukere og vanlige brukere.
+En full-stack webapplikasjon for å ha oversikt over oppskrifter, og mulighet for å samle disse i en meny. Inkluderer hjemmelaget autentisering med sikker lagring av passord ved bruk av hashing og salting, og autorisering for å skille mellom admin-brukere og vanlige brukere.
 
 ## Dokumentasjon
 
@@ -12,6 +12,10 @@ En full-stack webapplikasjon for å ha oversikt over oppskrifter. Inkluderer hje
   - Visning av oppskrift: [/web/src/pages/RecipeView/RecipeView.tsx](./web/src/pages/RecipeView/RecipeView.tsx)
   - Redigering av oppskrift: [/web/src/pages/EditRecipe/EditRecipe.tsx](./web/src/pages/EditRecipe/EditRecipe.tsx)
   - Oppretting av oppskrift: [/web/src/pages/NewRecipe/NewRecipe.tsx](./web/src/pages/NewRecipe/NewRecipe.tsx)
+  - Oversikt over menyer: [/web/src/pages/Menus/Menus.tsx](./web/src/pages/Menus/Menus.tsx)
+  - Visning av meny: [/web/src/pages/MenuView/MenuView.tsx](./web/src/pages/MenuView/MenuView.tsx)
+  - Redigering av meny: [/web/src/pages/EditMenu/EditMenu.tsx](./web/src/pages/EditMenu/EditMenu.tsx)
+  - Oppretting av meny: [/web/src/pages/NewMenu/NewMenu.tsx](./web/src/pages/NewMenu/NewMenu.tsx)
   - Visning og redigering av profil: [/web/src/pages/Me/Me.tsx](./web/src/pages/Me/Me.tsx)
   - Innlogging: [/web/src/pages/Login/Login.tsx](./web/src/pages/Login/Login.tsx)
   - Registrering: [/web/src/pages/Register/Register.tsx](./web/src/pages/Register/Register.tsx)

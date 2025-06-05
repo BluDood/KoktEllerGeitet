@@ -1,34 +1,33 @@
 import { Request, Response } from 'express'
-import { createMeal, filterMeal, getMeals } from '../../lib/meal.js'
-import { createMealSchema } from '../../lib/schemas.js'
+import { createMenu, filterMenu, getMenus } from '../../lib/menu.js'
+import { createMenuSchema } from '../../lib/schemas.js'
 import { logger } from '../../lib/utils.js'
 
 export async function get(req: Request, res: Response) {
   if (!req.user) return res.sendStatus(401)
 
-  const meals = await getMeals(req.user.id)
+  const menus = await getMenus(req.user.id)
 
-  res.send(meals.map(filterMeal))
+  res.send(menus.map(filterMenu))
 }
 
 export async function post(req: Request, res: Response) {
   if (!req.user) return res.sendStatus(401)
-  if (req.user.type !== 'admin') return res.sendStatus(403)
 
-  const parsed = createMealSchema.safeParse(req.body)
+  const parsed = createMenuSchema.safeParse(req.body)
   if (!parsed.success) return res.sendStatus(400)
   const { name, occasions } = parsed.data
 
-  const meal = await createMeal({
+  const menu = await createMenu({
     name,
     occasions,
     userId: req.user.id
   })
 
   logger.debug(
-    `User ${req.user.username} created meal ${meal.name}`,
-    'meals'
+    `User ${req.user.username} created menu ${menu.name}`,
+    'menus'
   )
 
-  res.send(filterMeal(meal))
+  res.send(filterMenu(menu))
 }

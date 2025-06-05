@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react'
-import styles from './EditMeal.module.css'
+import styles from './EditMenu.module.css'
 import { instance } from '../../lib/api.ts'
 import { useNavigate, useParams } from 'react-router'
 import Loader from '../../components/Loader/Loader.tsx'
 
-const EditMeal: React.FC = () => {
+const EditMenu: React.FC = () => {
   const navigate = useNavigate()
   const params = useParams()
   const nameRef = React.useRef<HTMLInputElement>(null)
   const occasionsRef = React.useRef<HTMLInputElement>(null)
-  const [meal, setMeal] = React.useState<MealWithRecipes | null>(null)
+  const [menu, setMenu] = React.useState<MenuWithRecipes | null>(null)
   const [recipes, setRecipes] = React.useState<Recipe[] | null>(null)
   const newRecipeRef = React.useRef<HTMLSelectElement>(null)
 
@@ -23,45 +23,45 @@ const EditMeal: React.FC = () => {
       return
     }
 
-    // oppdater spillelisten
-    const res = await instance.patch(`/meals/${params.id}`, {
+    // oppdater menyen
+    const res = await instance.patch(`/menus/${params.id}`, {
       name,
-      // splitt occasions siden det lagret som liste i databasen
+      // splitt anledninger siden det lagres som liste i databasen
       occasions: occasions
         .split(' ')
         .map(vibe => vibe.trim())
         .filter(vibe => vibe.length > 0),
-      recipes: meal!.recipes.map(recipe => recipe.id)
+      recipes: menu!.recipes.map(recipe => recipe.id)
     })
 
     if (res.status === 200) {
-      // naviger tilbake til spillelisten
-      navigate(`/meals/${res.data.id}`)
+      // naviger tilbake til menyen
+      navigate(`/menus/${res.data.id}`)
     } else {
       if (res.status === 400) {
         // 400 betyr at sjekken etter reglene feilet, vis melding til bruker
         alert(
-          'Please ensure all recipes are in unique genres, and contain at least one common vibe.'
+          'Please ensure all recipes are in unique categories, and contain at least one common taste profile.'
         )
       } else {
-        alert('Error updating meal')
+        alert('Error updating menu')
       }
     }
   }
 
   useEffect(() => {
-    async function fetchMeal() {
-      const res = await instance.get(`/meals/${params.id}`)
+    async function fetchMenu() {
+      const res = await instance.get(`/menus/${params.id}`)
 
       if (res.status === 200) {
-        setMeal(res.data)
+        setMenu(res.data)
       } else {
-        alert('Error fetching meal')
+        alert('Error fetching menu')
       }
     }
 
     async function fetchRecipes() {
-      // hent alle sanger, som gjør at brukeren kan legge til sanger i spillelisten
+      // hent alle oppskrifter, som gjør at brukeren kan legge til oppskrifter i menyen
       const res = await instance.get('/recipes')
 
       if (res.status === 200) {
@@ -71,13 +71,13 @@ const EditMeal: React.FC = () => {
       }
     }
 
-    fetchMeal()
+    fetchMenu()
     fetchRecipes()
   }, [params.id])
 
-  return meal && recipes ? (
+  return menu && recipes ? (
     <div className={styles.update}>
-      <h2>Update meal</h2>
+      <h2>Update menu</h2>
 
       <div className={styles.toolbar}>
         <input
@@ -85,7 +85,7 @@ const EditMeal: React.FC = () => {
           className={styles.title}
           placeholder="Name"
           ref={nameRef}
-          defaultValue={meal.name}
+          defaultValue={menu.name}
         />
         <div className={styles.actions}>
           <button className={styles.save}>
@@ -101,14 +101,14 @@ const EditMeal: React.FC = () => {
           <input
             type="text"
             ref={occasionsRef}
-            defaultValue={meal.occasions.join(' ')}
+            defaultValue={menu.occasions.join(' ')}
           />
         </div>
       </div>
       <div className={styles.recipes}>
         <h3>Recipes</h3>
         <div className={styles.list}>
-          {meal.recipes.map((recipe, i) => (
+          {menu.recipes.map((recipe, i) => (
             <div key={i} className={styles.recipe}>
               <div className={styles.text}>
                 <h2>{recipe.name}</h2>
@@ -116,9 +116,9 @@ const EditMeal: React.FC = () => {
               <button
                 data-type="delete"
                 onClick={() =>
-                  setMeal({
-                    ...meal,
-                    recipes: meal.recipes.filter((_, index) => index !== i)
+                  setMenu({
+                    ...menu,
+                    recipes: menu.recipes.filter((_, index) => index !== i)
                   })
                 }
               >
@@ -132,7 +132,7 @@ const EditMeal: React.FC = () => {
                 Add a recipe
               </option>
               {recipes
-                .filter(s => !meal.recipes.find(n => n.id === s.id))
+                .filter(s => !menu.recipes.find(n => n.id === s.id))
                 .map((recipe, i) => (
                   <option key={i} value={recipe.id}>
                     {recipe.name}
@@ -145,9 +145,9 @@ const EditMeal: React.FC = () => {
                   recipe => recipe.id === newRecipeRef.current?.value
                 )
                 if (!recipe) return
-                setMeal({
-                  ...meal,
-                  recipes: [...meal.recipes, recipe]
+                setMenu({
+                  ...menu,
+                  recipes: [...menu.recipes, recipe]
                 })
                 newRecipeRef.current!.value = ''
               }}
@@ -165,4 +165,4 @@ const EditMeal: React.FC = () => {
   )
 }
 
-export default EditMeal
+export default EditMenu

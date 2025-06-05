@@ -1,62 +1,62 @@
 import React, { useContext, useEffect, useState } from 'react'
-import styles from './MealView.module.css'
+import styles from './MenuView.module.css'
 import { instance } from '../../lib/api.ts'
 import { useNavigate, useParams } from 'react-router'
 import Loader from '../../components/Loader/Loader.tsx'
 import { UserContext } from '../../contexts/UserContext.tsx'
 
-const MealView: React.FC = () => {
+const MenuView: React.FC = () => {
   const navigate = useNavigate()
   const params = useParams()
 
-  const [meal, setMeal] = useState<MealWithRecipes | null>(null)
+  const [menu, setMenu] = useState<MenuWithRecipes | null>(null)
   const { user } = useContext(UserContext)
 
-  async function deleteMeal() {
+  async function deleteMenu() {
     // bekreftelse før sletting
-    if (!confirm('Are you sure you want to delete this meal?')) return
-    const res = await instance.delete(`/meals/${params.id}`)
+    if (!confirm('Are you sure you want to delete this menu?')) return
+    const res = await instance.delete(`/menus/${params.id}`)
 
     if (res.status === 204) {
-      // naviger tilbake til sanglisten
-      navigate('/meals')
+      // naviger tilbake til listen over menyer
+      navigate('/menus')
     } else {
-      console.error('Failed to delete meal')
+      console.error('Failed to delete menu')
     }
   }
 
   useEffect(() => {
-    async function updateMeal() {
-      // hent spilleliste
-      const meal = await instance.get(`/meals/${params.id}`)
+    async function updateMenu() {
+      // hent meny
+      const menu = await instance.get(`/menus/${params.id}`)
 
-      if (meal.status === 200) {
-        setMeal(meal.data)
+      if (menu.status === 200) {
+        setMenu(menu.data)
       } else {
-        if (meal.status === 404) {
-          alert('Meal not found!')
-          navigate('/meals')
+        if (menu.status === 404) {
+          alert('Menu not found!')
+          navigate('/menus')
         } else {
-          alert('Failed to fetch meal')
+          alert('Failed to fetch menu')
         }
       }
     }
 
-    updateMeal()
+    updateMenu()
   }, [params.id, navigate])
 
-  return meal ? (
-    <div className={styles.meal}>
+  return menu ? (
+    <div className={styles.menu}>
       <div className={styles.header}>
         {user?.type === 'admin' ? (
           <div className={styles.actions}>
             <button
               data-type="save"
-              onClick={() => navigate(`/meals/${params.id}/edit`)}
+              onClick={() => navigate(`/menus/${params.id}/edit`)}
             >
               <span className="material-icons">edit</span>
             </button>
-            <button data-type="delete" onClick={deleteMeal}>
+            <button data-type="delete" onClick={deleteMenu}>
               <span className="material-icons"> delete </span>
             </button>
           </div>
@@ -65,12 +65,12 @@ const MealView: React.FC = () => {
           <span className="material-icons">restaurant_menu</span>
         </div>
         <div className={styles.info}>
-          <h1>{meal.name}</h1>
+          <h1>{menu.name}</h1>
           <p>
-            {meal.recipes.length} recipe
-            {meal.recipes.length === 1 ? '' : 's'}
+            {menu.recipes.length} recipe
+            {menu.recipes.length === 1 ? '' : 's'}
           </p>
-          <p className={styles.details}>{meal.occasions.join(', ')}</p>
+          <p className={styles.details}>{menu.occasions.join(', ')}</p>
         </div>
       </div>
       <table className={styles.table}>
@@ -93,8 +93,8 @@ const MealView: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {meal.recipes &&
-            meal.recipes.map((recipe: Recipe) => (
+          {menu.recipes &&
+            menu.recipes.map((recipe: Recipe) => (
               <tr
                 key={recipe.id}
                 onClick={() => navigate(`/recipes/${recipe.id}`)}
@@ -115,4 +115,4 @@ const MealView: React.FC = () => {
   )
 }
 
-export default MealView
+export default MenuView
